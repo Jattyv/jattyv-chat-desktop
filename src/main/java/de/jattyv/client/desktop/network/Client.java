@@ -17,7 +17,8 @@
 package de.jattyv.client.desktop.network;
 
 import com.google.gson.Gson;
-import de.jattyv.client.desktop.handler.Handler;
+import de.jattyv.jcapi.client.handler.Handler;
+import de.jattyv.jcapi.client.network.JClient;
 import de.jattyv.jcapi.data.Container;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -30,7 +31,7 @@ import java.util.logging.Logger;
  *
  * @author Dimitrios Diamantidis &lt;Dimitri.dia@ledimi.com&gt;
  */
-public class Client {
+public class Client implements JClient {
 
     private Socket socket;
     private DataOutputStream out;
@@ -53,7 +54,7 @@ public class Client {
             in = new DataInputStream(socket.getInputStream());
             out = new DataOutputStream(socket.getOutputStream());
             write(c);
-            new Thread(new Reload(this)).start();
+            //new Thread(new Reload(this)).start();
         } catch (IOException ie) {
             System.out.println(ie);
         }

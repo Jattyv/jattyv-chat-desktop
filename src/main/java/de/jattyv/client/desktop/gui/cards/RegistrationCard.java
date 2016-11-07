@@ -17,8 +17,7 @@
 package de.jattyv.client.desktop.gui.cards;
 
 import de.jattyv.client.desktop.gui.Window;
-import de.jattyv.jcapi.data.Container;
-import de.jattyv.jcapi.util.ChatTags;
+import de.jattyv.jcapi.util.Packer;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -97,11 +96,7 @@ public class RegistrationCard extends JPanel implements KeyListener {
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
             String userName = inputRName.getText();
             String userPassword = inputRPassword.getText();
-            Container c = new Container();
-            c.setSuperTag(ChatTags.U_REGISTRATION);
-            c.addE(ChatTags.U_NAME, userName);
-            c.addE(ChatTags.U_PASSWORD, userPassword);
-            window.getHandler().start(c);
+            window.getHandler().start(Packer.packRegistration(userName, userPassword));
             window.changeCard(window.CHATC);
         }
 

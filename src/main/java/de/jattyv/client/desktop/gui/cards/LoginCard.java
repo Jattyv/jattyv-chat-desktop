@@ -17,6 +17,7 @@
 package de.jattyv.client.desktop.gui.cards;
 
 import de.jattyv.client.desktop.gui.Window;
+import de.jattyv.jcapi.util.Packer;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -84,17 +85,20 @@ public class LoginCard extends JPanel implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+            String userName = inputLName.getText();
+            String userPassword = inputLPassword.getText();
+            window.getHandler().start(Packer.packRegistration(userName, userPassword));
+            window.changeCard(window.CHATC);
+        }
     }
 
 }

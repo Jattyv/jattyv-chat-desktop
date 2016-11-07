@@ -17,6 +17,7 @@
 package de.jattyv.client.desktop.gui.cards;
 
 import de.jattyv.client.desktop.gui.Window;
+import de.jattyv.jcapi.util.Packer;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,6 +31,7 @@ import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
@@ -66,6 +68,7 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
         super();
         this.window = window;
         this.setLayout(new BorderLayout(0, 0));
+
 
         JSplitPane splitPane_1 = new JSplitPane();
         splitPane_1.setResizeWeight(0.85);
@@ -110,13 +113,8 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
         listMessages = new JList<String>(modelMessages);
         scrollPaneMessages.setViewportView(listMessages);
 
-    }
-
-    /*
-    @Override
-    public void repaint() {
         menuBar = new JMenuBar();
-        window.getFrame().setJMenuBar(menuBar);
+        this.add(menuBar, BorderLayout.NORTH);
 
         mnFriends = new JMenu("Friends");
         menuBar.add(mnFriends);
@@ -131,7 +129,7 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
         mntmSGR = new JMenuItem("add Group");
         mntmSGR.addActionListener(this);
         mnGroups.add(mntmSGR);
-    }*/
+    }
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -177,7 +175,14 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == mntmSFR) {
+            String fname = JOptionPane.showInputDialog("Enter The Friends Username:", "Friendsname");
+            window.getHandler().send(Packer.packNewFriendrequest(window.getHandler().getUser().getName(), fname));
+        }
+        if (e.getSource() == mntmSGR) {
+            String gname = JOptionPane.showInputDialog("Create a new Group:", "GroupName");
 
+        }
     }
 
 }

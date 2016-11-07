@@ -20,7 +20,8 @@ import de.jattyv.client.desktop.gui.cards.ChatCard;
 import de.jattyv.client.desktop.gui.cards.LoginCard;
 import de.jattyv.client.desktop.gui.cards.MenuCard;
 import de.jattyv.client.desktop.gui.cards.RegistrationCard;
-import de.jattyv.client.desktop.handler.Handler;
+import de.jattyv.jcapi.client.gui.JGui;
+import de.jattyv.jcapi.client.handler.Handler;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -29,7 +30,7 @@ import javax.swing.JPanel;
  *
  * @author Dimitrios Diamantidis &lt;Dimitri.dia@ledimi.com&gt;
  */
-public class Window {
+public class Window implements JGui {
 
     private JFrame frame;
 
