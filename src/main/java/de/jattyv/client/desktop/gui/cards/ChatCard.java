@@ -25,6 +25,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.LinkedList;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
@@ -176,6 +177,11 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
+        modelMessages.clear();
+        LinkedList<String> messages = window.getHandler().getMessages(listFG.getSelectedValue());
+        for (String message : messages) {
+            modelMessages.addElement(message);
+        }
 
     }
 
@@ -191,8 +197,10 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
         }
     }
 
-    public void addMessage(String message) {
-        modelMessages.addElement(message);
+    public void addMessage(String fName, String message) {
+        if (listFG.getSelectedValue().equals(fName)) {
+            modelMessages.addElement(message);
+        }
     }
 
 }

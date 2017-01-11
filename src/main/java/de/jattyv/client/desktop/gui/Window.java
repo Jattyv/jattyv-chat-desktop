@@ -92,8 +92,8 @@ public class Window implements JGui {
     }
 
     @Override
-    public void addMessage(String message) {
-        ccard.addMessage(message);
+    public void addMessage(String fName, String message) {
+        ccard.addMessage(fName, message);
     }
 
     public void startServer() {
