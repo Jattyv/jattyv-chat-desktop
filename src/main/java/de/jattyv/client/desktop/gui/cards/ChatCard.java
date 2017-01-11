@@ -143,6 +143,12 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
 
     @Override
     public void keyReleased(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+            String toUser = listFG.getSelectedValue();
+            String message = textAreaInput.getText();
+            textAreaInput.setText("");
+            window.getHandler().send(Packer.packNewMessage(window.getHandler().getUser().getName(), toUser, message));
+        }
 
     }
 
@@ -177,12 +183,16 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == mntmSFR) {
             String fname = JOptionPane.showInputDialog("Enter The Friends Username:", "Friendsname");
-            window.getHandler().send(Packer.packNewFriendrequest(window.getHandler().getUser().getName(), fname));
+            modelFriends.addElement(fname);
         }
         if (e.getSource() == mntmSGR) {
             String gname = JOptionPane.showInputDialog("Create a new Group:", "GroupName");
-
+            modelGroups.addElement(gname);
         }
+    }
+
+    public void addMessage(String message) {
+        modelMessages.addElement(message);
     }
 
 }

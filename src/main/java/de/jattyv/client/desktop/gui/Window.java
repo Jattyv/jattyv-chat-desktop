@@ -89,4 +89,9 @@ public class Window implements JGui {
         this.handler = handler;
     }
 
+    @Override
+    public void addMessage(String message) {
+        ccard.addMessage(message);
+    }
+
 }

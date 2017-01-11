@@ -54,7 +54,7 @@ public class Client implements JClient {
             in = new DataInputStream(socket.getInputStream());
             out = new DataOutputStream(socket.getOutputStream());
             write(c);
-            //new Thread(new Reload(this)).start();
+            new Thread(new Reload(this)).start();
         } catch (IOException ie) {
             System.out.println(ie);
         }
@@ -72,6 +72,7 @@ public class Client implements JClient {
     public void reload() {
         try {
             String input = in.readUTF();
+            Logger.getLogger(Client.class.getName()).log(Level.INFO, input);
             Container c = gson.fromJson(input, Container.class);
             handler.handle(c);
         } catch (IOException ex) {
