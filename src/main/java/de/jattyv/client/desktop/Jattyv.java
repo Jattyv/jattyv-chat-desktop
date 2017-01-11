@@ -17,8 +17,8 @@
 package de.jattyv.client.desktop;
 
 import de.jattyv.client.desktop.gui.Window;
+import de.jattyv.client.desktop.network.client.Client;
 import de.jattyv.jcapi.client.handler.Handler;
-import de.jattyv.client.desktop.network.Client;
 import de.jattyv.jcapi.util.ChatTags;
 
 /**
@@ -36,7 +36,6 @@ public class Jattyv implements ChatTags {
         handler.setClient(cl);
         window.setHandler(handler);
         window.init();
-
 
     }
 

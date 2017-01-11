@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <name>Jattyv Desktop Client Application</name>
+    <name>Jattyv Desktop Application</name>
     <groupId>de.jattyv.client.desktop</groupId>
     <artifactId>jattyv-client-desktop</artifactId>
     <version>0.1-SNAPSHOT</version>
@@ -16,6 +16,11 @@
         <dependency>
             <groupId>de.jattyv.jcapi</groupId>
             <artifactId>jcapi</artifactId>
+            <version>0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>de.jattyv.jsapi</groupId>
+            <artifactId>jsapi</artifactId>
             <version>0.1-SNAPSHOT</version>
         </dependency>
         <dependency>

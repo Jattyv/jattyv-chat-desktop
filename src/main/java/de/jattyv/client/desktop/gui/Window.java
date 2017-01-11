@@ -20,8 +20,10 @@ import de.jattyv.client.desktop.gui.cards.ChatCard;
 import de.jattyv.client.desktop.gui.cards.LoginCard;
 import de.jattyv.client.desktop.gui.cards.MenuCard;
 import de.jattyv.client.desktop.gui.cards.RegistrationCard;
+import de.jattyv.client.desktop.network.server.Server;
 import de.jattyv.jcapi.client.gui.JGui;
 import de.jattyv.jcapi.client.handler.Handler;
+import de.jattyv.jsapi.JattyvServer;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -92,6 +94,12 @@ public class Window implements JGui {
     @Override
     public void addMessage(String message) {
         ccard.addMessage(message);
+    }
+
+    public void startServer() {
+        Server server = new Server(36987);
+        JattyvServer jServer = new JattyvServer(server);
+        jServer.start();
     }
 
 }

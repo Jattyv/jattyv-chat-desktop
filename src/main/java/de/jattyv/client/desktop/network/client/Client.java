@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.jattyv.client.desktop.network;
+package de.jattyv.client.desktop.network.client;
 
 import com.google.gson.Gson;
 import de.jattyv.jcapi.client.handler.Handler;

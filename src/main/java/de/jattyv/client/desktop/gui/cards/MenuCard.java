@@ -34,15 +34,22 @@ public class MenuCard extends JPanel implements ActionListener {
     JButton btnLogin;
     JButton btnRegist;
 
+    JButton startServer;
+
     Window window;
 
     public MenuCard(Window window) {
         super();
         this.window = window;
         this.setLayout(new BorderLayout(0, 0));
+        JSplitPane splitBase = new JSplitPane();
+        splitBase.setResizeWeight(0.5);
+        splitBase.setOrientation(JSplitPane.VERTICAL_SPLIT);
+        this.add(splitBase, BorderLayout.SOUTH);
+
         JSplitPane splitPane = new JSplitPane();
         splitPane.setResizeWeight(0.5);
-        this.add(splitPane, BorderLayout.SOUTH);
+        splitBase.setRightComponent(splitPane);
 
         btnLogin = new JButton("Login");
         btnLogin.addActionListener(this);
@@ -56,6 +63,10 @@ public class MenuCard extends JPanel implements ActionListener {
         textAreaInfo.setEditable(false);
         textAreaInfo.setText("A JavaBased Chat Application");
         this.add(textAreaInfo, BorderLayout.CENTER);
+
+        startServer = new JButton("Start Server");
+        startServer.addActionListener(this);
+        splitBase.setLeftComponent(startServer);
     }
 
     @Override
@@ -64,6 +75,8 @@ public class MenuCard extends JPanel implements ActionListener {
             window.changeCard(window.LOGINC);
         } else if (e.getSource() == btnRegist) {
             window.changeCard(window.REGISTRATIONC);
+        } else if (e.getSource() == startServer) {
+            window.startServer();
         }
 
     }
