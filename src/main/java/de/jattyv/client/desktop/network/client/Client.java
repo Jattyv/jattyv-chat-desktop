@@ -19,7 +19,7 @@ package de.jattyv.client.desktop.network.client;
 import com.google.gson.Gson;
 import de.jattyv.jcapi.client.handler.Handler;
 import de.jattyv.jcapi.client.network.JClient;
-import de.jattyv.jcapi.data.Container;
+import de.jattyv.jcapi.data.jobject.Container;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
