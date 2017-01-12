@@ -61,7 +61,10 @@ public class MenuCard extends JPanel implements ActionListener {
 
         JTextArea textAreaInfo = new JTextArea();
         textAreaInfo.setEditable(false);
-        textAreaInfo.setText("A JavaBased Chat Application");
+        textAreaInfo.setText("Jattyv\n"
+                + "A JavaBased Chat Application.\n"
+                + "Includes Server and Client.\n"
+                + "Version 0.1");
         this.add(textAreaInfo, BorderLayout.CENTER);
 
         startServer = new JButton("Start Server");

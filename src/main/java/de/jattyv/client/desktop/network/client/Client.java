@@ -74,7 +74,6 @@ public class Client implements JClient {
     public void reload() {
         try {
             String input = in.readUTF();
-            Logger.getLogger(Client.class.getName()).log(Level.INFO, input);
             Container c = gson.fromJson(input, Container.class);
             handler.handle(c);
         } catch (IOException ex) {
