@@ -16,6 +16,7 @@
  */
 package de.jattyv.client.desktop.gui;
 
+import de.jattyv.client.desktop.data.ConfigReader;
 import de.jattyv.client.desktop.gui.cards.ChatCard;
 import de.jattyv.client.desktop.gui.cards.LoginCard;
 import de.jattyv.client.desktop.gui.cards.MenuCard;
@@ -98,7 +99,7 @@ public class Window implements JGui {
     }
 
     public void startServer() {
-        Server server = new Server(36987);
+        Server server = new Server(new ConfigReader().read("jattyv.properties").getPort());
         JattyvServer jServer = new JattyvServer(server);
         jServer.start();
     }
@@ -107,6 +108,7 @@ public class Window implements JGui {
     public void changeWindow(String window) {
         if (window.equals(JGui.CHAT_WINDOW)) {
             changeCard(CHATC);
+            frame.setTitle(frame.getTitle() + " - " + handler.getUser().getName());
         }
     }
 
