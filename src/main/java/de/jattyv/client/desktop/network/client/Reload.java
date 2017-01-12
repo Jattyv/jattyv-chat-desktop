@@ -20,7 +20,7 @@ package de.jattyv.client.desktop.network.client;
  *
  * @author Dimitrios Diamantidis &lt;Dimitri.dia@ledimi.com&gt;
  */
-public class Reload implements Runnable {
+public class Reload extends Thread {
 
     Client cl;
     boolean connected;

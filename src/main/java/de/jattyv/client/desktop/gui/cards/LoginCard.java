@@ -96,8 +96,7 @@ public class LoginCard extends JPanel implements KeyListener {
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
             String userName = inputLName.getText();
             String userPassword = inputLPassword.getText();
-            window.getHandler().start(Packer.packRegistration(userName, userPassword));
-            window.changeCard(window.CHATC);
+            window.getHandler().start(Packer.packLogin(userName, userPassword));
         }
     }
 

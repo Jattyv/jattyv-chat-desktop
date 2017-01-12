@@ -26,6 +26,7 @@ import de.jattyv.jcapi.client.handler.Handler;
 import de.jattyv.jsapi.JattyvServer;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -100,6 +101,18 @@ public class Window implements JGui {
         Server server = new Server(36987);
         JattyvServer jServer = new JattyvServer(server);
         jServer.start();
+    }
+
+    @Override
+    public void changeWindow(String window) {
+        if (window.equals(JGui.CHAT_WINDOW)) {
+            changeCard(CHATC);
+        }
+    }
+
+    @Override
+    public void showError(String errKey) {
+        JOptionPane.showMessageDialog(null, errKey, "ERROR", JOptionPane.ERROR_MESSAGE);
     }
 
 }

@@ -39,8 +39,9 @@ public class Client implements JClient {
 
     private int port;
     private String host;
-    Gson gson;
-    Handler handler;
+    private Gson gson;
+    private Handler handler;
+    private Reload reload;
 
     public Client(String host, int port) {
         this.port = port;
@@ -54,7 +55,8 @@ public class Client implements JClient {
             in = new DataInputStream(socket.getInputStream());
             out = new DataOutputStream(socket.getOutputStream());
             write(c);
-            new Thread(new Reload(this)).start();
+            reload = new Reload(this);
+            reload.start();
         } catch (IOException ie) {
             System.out.println(ie);
         }
@@ -82,5 +84,15 @@ public class Client implements JClient {
 
     public void setHandler(Handler handler) {
         this.handler = handler;
+    }
+
+    @Override
+    public void close() {
+        try {
+            socket.close();
+            reload.stop();
+        } catch (IOException ex) {
+            Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
