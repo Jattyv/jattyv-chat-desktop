@@ -198,8 +198,10 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
     }
 
     public void addMessage(String fName, String message) {
+        if (!listFG.isSelectionEmpty()) {
         if (listFG.getSelectedValue().equals(fName)) {
             modelMessages.addElement(message);
+            }
         }
     }
 

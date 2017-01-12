@@ -16,14 +16,17 @@
  */
 package de.jattyv.client.desktop.network.client;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Dimitrios Diamantidis &lt;Dimitri.dia@ledimi.com&gt;
  */
 public class Reload extends Thread {
 
-    Client cl;
-    boolean connected;
+    private Client cl;
+    private boolean connected;
 
     public Reload(Client cl) {
         this.cl = cl;
@@ -36,8 +39,8 @@ public class Reload extends Thread {
             try {
                 Thread.sleep(1000);
                 cl.reload();
-            } catch (Exception e) {
-                connected = false;
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Reload.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
