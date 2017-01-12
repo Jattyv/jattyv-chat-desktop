@@ -17,7 +17,6 @@
 package de.jattyv.client.desktop.gui.cards;
 
 import de.jattyv.client.desktop.gui.Window;
-import de.jattyv.jcapi.util.Packer;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -148,7 +147,7 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
             String toUser = listFG.getSelectedValue();
             String message = textAreaInput.getText();
             textAreaInput.setText("");
-            window.getHandler().send(Packer.packNewMessage(window.getHandler().getUser().getName(), toUser, message));
+            window.getHandler().getOutHandler().sendNewMessage(toUser, message);
         }
 
     }
