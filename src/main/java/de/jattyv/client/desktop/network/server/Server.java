@@ -46,7 +46,6 @@ public class Server extends JServer {
                 Socket s = listener.accept();
                 ServerThread st = new ServerThread(new Connection(this, s), dc);
                 Client cl = new Client(st);
-                reloadHandler.addClient(cl);
                 cl.start();
             }
         } catch (IOException ex) {
