@@ -20,7 +20,6 @@ import de.jattyv.client.desktop.data.ConfigReader;
 import de.jattyv.client.desktop.gui.Window;
 import de.jattyv.client.desktop.network.client.Client;
 import de.jattyv.jcapi.client.handler.Handler;
-import de.jattyv.jcapi.data.jfc.data.Settings;
 import de.jattyv.jcapi.util.ChatTags;
 
 /**
@@ -32,8 +31,7 @@ public class Jattyv implements ChatTags {
     public static void main(String[] args) {
         Window window = new Window();
         Handler handler = new Handler();
-        Settings config = new ConfigReader().read("jattyv.properties");
-        Client cl = new Client(config.getIp(), config.getPort());
+        Client cl = new Client(new ConfigReader().read("jattyv.properties"));
         cl.setHandler(handler);
         handler.setWindow(window);
         handler.setClient(cl);

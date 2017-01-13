@@ -16,10 +16,11 @@
  */
 package de.jattyv.client.desktop.network.client;
 
-import com.google.gson.Gson;
-import de.jattyv.jcapi.client.handler.Handler;
+import de.jattyv.client.desktop.network.server.Server;
 import de.jattyv.jcapi.client.network.JClient;
+import de.jattyv.jcapi.data.jfc.data.Settings;
 import de.jattyv.jcapi.data.jobject.Container;
+import de.jattyv.jsapi.JattyvServer;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -31,24 +32,28 @@ import java.util.logging.Logger;
  *
  * @author Dimitrios Diamantidis &lt;Dimitri.dia@ledimi.com&gt;
  */
-public class Client implements JClient {
+public class Client extends JClient {
 
     private Socket socket;
     private DataOutputStream out;
     private DataInputStream in;
 
-    private int port;
-    private String host;
-    private Gson gson;
-    private Handler handler;
-    private Reload reload;
+    protected Reload reload;
 
     public Client(String host, int port) {
-        this.port = port;
-        this.host = host;
-        gson = new Gson();
+        super(host, port);
     }
 
+    public Client(Settings settings) {
+        super(settings);
+        if (settings.isAutoStartServer()) {
+            Server server = new Server(settings.getPort());
+            JattyvServer jServer = new JattyvServer(server);
+            jServer.start();
+        }
+    }
+
+    @Override
     public void start(Container c) {
         try {
             socket = new Socket(host, port);
@@ -63,6 +68,7 @@ public class Client implements JClient {
 
     }
 
+    @Override
     public void write(Container c) {
         try {
             out.writeUTF(gson.toJson(c));
@@ -71,6 +77,7 @@ public class Client implements JClient {
         }
     }
 
+    @Override
     public void reload() {
         try {
             String input = in.readUTF();
@@ -79,10 +86,6 @@ public class Client implements JClient {
         } catch (IOException ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    public void setHandler(Handler handler) {
-        this.handler = handler;
     }
 
     @Override
