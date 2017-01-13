@@ -102,6 +102,7 @@ public class Window implements JGui {
         Server server = new Server(new ConfigReader().read("jattyv.properties").getPort());
         JattyvServer jServer = new JattyvServer(server);
         jServer.start();
+        JOptionPane.showMessageDialog(null, "Server started", "INFO", JOptionPane.INFORMATION_MESSAGE);
     }
 
     @Override
