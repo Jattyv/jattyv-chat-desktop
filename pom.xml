@@ -41,7 +41,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>de.jattyv.client.desktop.Jattyv</mainClass>
+                            <mainClass>de.jattyv.desktop.Jattyv</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
