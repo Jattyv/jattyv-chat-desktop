@@ -14,9 +14,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.jattyv.client.desktop.network.client;
+package de.jattyv.desktop.network.client;
 
-import de.jattyv.client.desktop.network.server.Server;
+import de.jattyv.desktop.network.server.Server;
 import de.jattyv.jcapi.client.network.JClient;
 import de.jattyv.jcapi.data.jfc.data.Settings;
 import de.jattyv.jcapi.data.jobject.Container;

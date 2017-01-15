@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 Dimitrios Diamantidis &lt;Dimitri.dia@ledimi.com&gt;
+ * Copyright (C) 2017 Dimitrios Diamantidis &lt;Dimitri.dia@ledimi.com&gt;
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,8 +14,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.jattyv.client.desktop.network.client;
+package de.jattyv.desktop.data;
 
+import de.jattyv.jcapi.data.jfc.JattyvFileController;
+import de.jattyv.jcapi.data.jfc.JattyvFileReader;
+import de.jattyv.jcapi.data.jfc.data.Settings;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,26 +29,23 @@ import java.util.logging.Logger;
  *
  * @author Dimitrios Diamantidis &lt;Dimitri.dia@ledimi.com&gt;
  */
-public class Reload extends Thread {
+public class ConfigReader implements JattyvFileReader {
 
-    private Client cl;
-    private boolean connected;
+    @Override
+    public Settings read(String path) {
+        try {
+            InputStream in = new FileInputStream(path);
+            return JattyvFileController.readSettings(in);
 
-    public Reload(Client cl) {
-        this.cl = cl;
-        connected = true;
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ConfigReader.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+
     }
 
     @Override
-    public void run() {
-        while (connected) {
-            try {
-                Thread.sleep(1000);
-                cl.reload();
-            } catch (InterruptedException ex) {
-                Logger.getLogger(Reload.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+    public void write(String dataname, String content) {
 
     }
 

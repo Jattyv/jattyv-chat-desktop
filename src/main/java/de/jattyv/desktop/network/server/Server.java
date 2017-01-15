@@ -14,9 +14,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.jattyv.client.desktop.network.server;
+package de.jattyv.desktop.network.server;
 
-import de.jattyv.client.desktop.network.server.data.Connection;
+import de.jattyv.desktop.network.server.data.Connection;
 import de.jattyv.jsapi.network.Client;
 import de.jattyv.jsapi.network.JServer;
 import de.jattyv.jsapi.network.ServerThread;

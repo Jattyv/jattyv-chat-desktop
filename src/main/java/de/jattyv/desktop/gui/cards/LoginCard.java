@@ -14,9 +14,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.jattyv.client.desktop.gui.cards;
+package de.jattyv.desktop.gui.cards;
 
-import de.jattyv.client.desktop.gui.Window;
+import de.jattyv.desktop.gui.Window;
 import de.jattyv.jcapi.util.Packer;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;

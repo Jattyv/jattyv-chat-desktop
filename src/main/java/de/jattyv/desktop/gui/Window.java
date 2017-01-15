@@ -14,14 +14,14 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.jattyv.client.desktop.gui;
+package de.jattyv.desktop.gui;
 
-import de.jattyv.client.desktop.data.ConfigReader;
-import de.jattyv.client.desktop.gui.cards.ChatCard;
-import de.jattyv.client.desktop.gui.cards.LoginCard;
-import de.jattyv.client.desktop.gui.cards.MenuCard;
-import de.jattyv.client.desktop.gui.cards.RegistrationCard;
-import de.jattyv.client.desktop.network.server.Server;
+import de.jattyv.desktop.data.ConfigReader;
+import de.jattyv.desktop.gui.cards.ChatCard;
+import de.jattyv.desktop.gui.cards.LoginCard;
+import de.jattyv.desktop.gui.cards.MenuCard;
+import de.jattyv.desktop.gui.cards.RegistrationCard;
+import de.jattyv.desktop.network.server.Server;
 import de.jattyv.jcapi.client.gui.JGui;
 import de.jattyv.jcapi.client.handler.Handler;
 import de.jattyv.jsapi.JattyvServer;

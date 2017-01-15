@@ -14,29 +14,35 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.jattyv.client.desktop;
+package de.jattyv.desktop.network.client;
 
-import de.jattyv.client.desktop.data.ConfigReader;
-import de.jattyv.client.desktop.gui.Window;
-import de.jattyv.client.desktop.network.client.Client;
-import de.jattyv.jcapi.client.handler.Handler;
-import de.jattyv.jcapi.util.ChatTags;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Dimitrios Diamantidis &lt;Dimitri.dia@ledimi.com&gt;
  */
-public class Jattyv implements ChatTags {
+public class Reload extends Thread {
 
-    public static void main(String[] args) {
-        Window window = new Window();
-        Handler handler = new Handler();
-        Client cl = new Client(new ConfigReader().read("jattyv.properties"));
-        cl.setHandler(handler);
-        handler.setWindow(window);
-        handler.setClient(cl);
-        window.setHandler(handler);
-        window.init();
+    private Client cl;
+    private boolean connected;
+
+    public Reload(Client cl) {
+        this.cl = cl;
+        connected = true;
+    }
+
+    @Override
+    public void run() {
+        while (connected) {
+            try {
+                Thread.sleep(1000);
+                cl.reload();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Reload.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
 
     }
 

@@ -14,9 +14,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package de.jattyv.client.desktop.gui.cards;
+package de.jattyv.desktop.gui.cards;
 
-import de.jattyv.client.desktop.gui.Window;
+import de.jattyv.desktop.gui.Window;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -179,7 +179,7 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
         modelMessages.clear();
         LinkedList<String> messages = window.getHandler().getMessages(listFG.getSelectedValue());
         for (String message : messages) {
-            modelMessages.addElement(message);
+            addMessage(listFG.getSelectedValue(), message);
         }
 
     }
@@ -200,6 +200,7 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
         if (!listFG.isSelectionEmpty()) {
         if (listFG.getSelectedValue().equals(fName)) {
             modelMessages.addElement(message);
+            scrollPaneFG.setViewportView(listFG);
             }
         }
     }
