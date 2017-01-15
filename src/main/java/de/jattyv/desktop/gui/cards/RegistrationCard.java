@@ -17,7 +17,6 @@
 package de.jattyv.desktop.gui.cards;
 
 import de.jattyv.desktop.gui.Window;
-import de.jattyv.jcapi.util.Packer;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -96,7 +95,7 @@ public class RegistrationCard extends JPanel implements KeyListener {
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
             String userName = inputRName.getText();
             String userPassword = inputRPassword.getText();
-            window.getHandler().start(Packer.packRegistration(userName, userPassword));
+            window.getHandler().getOutHandler().sendRegist(userName, userPassword);
             window.changeCard(window.CHATC);
         }
 

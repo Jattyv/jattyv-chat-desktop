@@ -17,7 +17,6 @@
 package de.jattyv.desktop.gui.cards;
 
 import de.jattyv.desktop.gui.Window;
-import de.jattyv.jcapi.util.Packer;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -96,7 +95,7 @@ public class LoginCard extends JPanel implements KeyListener {
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
             String userName = inputLName.getText();
             String userPassword = inputLPassword.getText();
-            window.getHandler().start(Packer.packLogin(userName, userPassword));
+            window.getHandler().getOutHandler().sendLogin(userName, userPassword);
         }
     }
 
