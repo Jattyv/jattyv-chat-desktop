@@ -69,7 +69,6 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
         this.window = window;
         this.setLayout(new BorderLayout(0, 0));
 
-
         JSplitPane splitPane_1 = new JSplitPane();
         splitPane_1.setResizeWeight(0.85);
         splitPane_1.setOrientation(JSplitPane.VERTICAL_SPLIT);
@@ -198,9 +197,9 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
 
     public void addMessage(String fName, String message) {
         if (!listFG.isSelectionEmpty()) {
-        if (listFG.getSelectedValue().equals(fName)) {
-            modelMessages.addElement(message);
-            scrollPaneFG.setViewportView(listFG);
+            if (listFG.getSelectedValue().equals(fName)) {
+                modelMessages.addElement(message);
+                listMessages.ensureIndexIsVisible(modelMessages.size() - 1);
             }
         }
     }
