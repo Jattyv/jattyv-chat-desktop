@@ -21,10 +21,9 @@ import de.jattyv.desktop.gui.cards.ChatCard;
 import de.jattyv.desktop.gui.cards.LoginCard;
 import de.jattyv.desktop.gui.cards.MenuCard;
 import de.jattyv.desktop.gui.cards.RegistrationCard;
-import de.jattyv.desktop.network.server.Server;
 import de.jattyv.jcapi.client.gui.JGui;
 import de.jattyv.jcapi.client.handler.Handler;
-import de.jattyv.jsapi.JattyvServer;
+import de.jattyv.jsapi.ChatServer;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -99,9 +98,7 @@ public class Window implements JGui {
     }
 
     public void startServer() {
-        Server server = new Server(new ConfigReader().read("jattyv.properties").getPort());
-        JattyvServer jServer = new JattyvServer(server);
-        jServer.start();
+        new ChatServer(new ConfigReader().read("jattyv.properties").getPort()).start();
         JOptionPane.showMessageDialog(null, "Server started", "INFO", JOptionPane.INFORMATION_MESSAGE);
     }
 
