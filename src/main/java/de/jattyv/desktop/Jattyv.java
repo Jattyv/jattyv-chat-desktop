@@ -31,6 +31,7 @@ public class Jattyv implements ChatTags {
         Chat c = new Chat(new ConfigReader().read("jattyv.properties"));
         Window window = new Window();
         window.setHandler(c.getHandler());
+        c.setGui(window);
         window.init();
 
     }
