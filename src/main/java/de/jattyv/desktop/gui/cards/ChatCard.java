@@ -16,7 +16,10 @@
  */
 package de.jattyv.desktop.gui.cards;
 
+import de.jattyv.desktop.data.ConfigFileHandler;
 import de.jattyv.desktop.gui.Window;
+import de.jattyv.jcapi.data.jfc.JattyvFileController;
+import de.jattyv.jcapi.data.jfc.data.Settings;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -53,6 +56,7 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
     JList<String> listFG;
     JList<String> listMessages;
     private DefaultListModel<String> modelFriends = new DefaultListModel<String>();
+    private LinkedList<String> friends = new LinkedList<>();
     private DefaultListModel<String> modelMessages = new DefaultListModel<String>();
     private DefaultListModel<String> modelGroups = new DefaultListModel<String>();
 
@@ -64,7 +68,9 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
 
     Window window;
 
-    public ChatCard(Window window) {
+    Settings settings;
+
+    public ChatCard(Window window, Settings settings) {
         super();
         this.window = window;
         this.setLayout(new BorderLayout(0, 0));
@@ -128,6 +134,15 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
         mntmSGR = new JMenuItem("add Group");
         mntmSGR.addActionListener(this);
         mnGroups.add(mntmSGR);
+
+        this.settings = settings;
+
+        if (settings.isClientSettingsAvailable()) {
+        for (String fname : settings.getClientSettings().getFriends()) {
+            modelFriends.addElement(fname);
+            friends.add(fname);
+            }
+        }
     }
 
     @Override
@@ -188,6 +203,10 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
         if (e.getSource() == mntmSFR) {
             String fname = JOptionPane.showInputDialog("Enter The Friends Username:", "Friendsname");
             modelFriends.addElement(fname);
+            friends.add(fname);
+            if (settings.isClientSettingsPathAvailable()) {
+                new ConfigFileHandler().write(settings.getClientSettingsPath(), JattyvFileController.getFriendsAsJson(friends));
+            }
         }
         if (e.getSource() == mntmSGR) {
             String gname = JOptionPane.showInputDialog("Create a new Group:", "GroupName");

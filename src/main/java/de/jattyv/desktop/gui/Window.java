@@ -16,13 +16,13 @@
  */
 package de.jattyv.desktop.gui;
 
-import de.jattyv.desktop.data.ConfigReader;
 import de.jattyv.desktop.gui.cards.ChatCard;
 import de.jattyv.desktop.gui.cards.LoginCard;
 import de.jattyv.desktop.gui.cards.MenuCard;
 import de.jattyv.desktop.gui.cards.RegistrationCard;
 import de.jattyv.jcapi.client.gui.JGui;
 import de.jattyv.jcapi.client.handler.Handler;
+import de.jattyv.jcapi.data.jfc.data.Settings;
 import de.jattyv.jsapi.ChatServer;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
@@ -51,11 +51,13 @@ public class Window implements JGui {
 
     private Handler handler;
 
-    public Window() {
+    private Settings settings;
+
+    public Window(Settings settings) {
         mcard = new MenuCard(this);
         lcard = new LoginCard(this);
         rcard = new RegistrationCard(this);
-        ccard = new ChatCard(this);
+        ccard = new ChatCard(this, settings);
         clayout = new CardLayout();
         card = new JPanel();
         card.setLayout(clayout);
@@ -63,6 +65,7 @@ public class Window implements JGui {
         card.add(lcard, LOGINC);
         card.add(rcard, REGISTRATIONC);
         card.add(ccard, CHATC);
+        this.settings = settings;
     }
 
     public void init() {
@@ -98,7 +101,7 @@ public class Window implements JGui {
     }
 
     public void startServer() {
-        new ChatServer(new ConfigReader().read("jattyv.properties").getPort()).start();
+        new ChatServer(settings).start();
         JOptionPane.showMessageDialog(null, "Server started", "INFO", JOptionPane.INFORMATION_MESSAGE);
     }
 
