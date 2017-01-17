@@ -54,8 +54,8 @@ public class Window implements JGui {
 
     public Window(Settings settings) {
         mcard = new MenuCard(this);
-        lcard = new LoginCard(this, false);
-        rcard = new LoginCard(this, true);
+        lcard = new LoginCard(this, false, settings);
+        rcard = new LoginCard(this, true, settings);
         ccard = new ChatCard(this, settings);
         clayout = new CardLayout();
         card = new JPanel();
