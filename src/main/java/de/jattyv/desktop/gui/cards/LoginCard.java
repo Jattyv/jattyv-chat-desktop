@@ -33,14 +33,18 @@ import javax.swing.JTextField;
  */
 public class LoginCard extends JPanel implements KeyListener {
 
-    JTextField inputLName;
-    JPasswordField inputLPassword;
+    private JTextField inputLName;
+    private JPasswordField inputLPassword;
 
-    Window window;
+    private Window window;
 
-    public LoginCard(Window window) {
+    private boolean registration;
+
+
+    public LoginCard(Window window, boolean registration) {
         super();
         this.window = window;
+        this.registration = registration;
         GridBagLayout gbl_card2 = new GridBagLayout();
         gbl_card2.columnWidths = new int[]{0, 0, 0, 0, 0};
         gbl_card2.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -95,7 +99,11 @@ public class LoginCard extends JPanel implements KeyListener {
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
             String userName = inputLName.getText();
             String userPassword = inputLPassword.getText();
-            window.getHandler().getOutHandler().sendLogin(userName, userPassword);
+            if (registration) {
+                window.getHandler().getOutHandler().sendRegist(userName, userPassword);
+            } else {
+                window.getHandler().getOutHandler().sendLogin(userName, userPassword);
+            }
         }
     }
 

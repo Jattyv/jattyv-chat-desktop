@@ -19,7 +19,6 @@ package de.jattyv.desktop.gui;
 import de.jattyv.desktop.gui.cards.ChatCard;
 import de.jattyv.desktop.gui.cards.LoginCard;
 import de.jattyv.desktop.gui.cards.MenuCard;
-import de.jattyv.desktop.gui.cards.RegistrationCard;
 import de.jattyv.jcapi.client.gui.JGui;
 import de.jattyv.jcapi.client.handler.Handler;
 import de.jattyv.jcapi.data.jfc.data.Settings;
@@ -41,7 +40,7 @@ public class Window implements JGui {
     private JPanel card;
     private MenuCard mcard;
     private LoginCard lcard;
-    private RegistrationCard rcard;
+    private LoginCard rcard;
     private ChatCard ccard;
 
     public final String MENUC = "menu";
@@ -55,8 +54,8 @@ public class Window implements JGui {
 
     public Window(Settings settings) {
         mcard = new MenuCard(this);
-        lcard = new LoginCard(this);
-        rcard = new RegistrationCard(this);
+        lcard = new LoginCard(this, false);
+        rcard = new LoginCard(this, true);
         ccard = new ChatCard(this, settings);
         clayout = new CardLayout();
         card = new JPanel();
