@@ -118,4 +118,9 @@ public class ConfigFileHandler implements JattyvFileHandler {
         return null;
     }
 
+    @Override
+    public void writeSettings(String dataName, Settings settings) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
