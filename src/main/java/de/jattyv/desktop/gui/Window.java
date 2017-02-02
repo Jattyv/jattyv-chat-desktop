@@ -22,7 +22,7 @@ import de.jattyv.desktop.gui.cards.MenuCard;
 import de.jattyv.jcapi.client.gui.JGui;
 import de.jattyv.jcapi.client.handler.Handler;
 import de.jattyv.jcapi.data.jfc.data.Settings;
-import de.jattyv.jsapi.ChatServer;
+import de.jattyv.jcapi.server.ChatServer;
 import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -115,6 +115,20 @@ public class Window implements JGui {
     @Override
     public void showError(String errKey) {
         JOptionPane.showMessageDialog(null, errKey, "ERROR", JOptionPane.ERROR_MESSAGE);
+    }
+
+
+    @Override
+    public boolean alert(String msg, String alertType) {
+        return false;
+    }
+
+    @Override
+    public void addGroup(String gName) {
+    }
+
+    @Override
+    public void addGroupMessage(String gName, String fName, String message) {
     }
 
 }

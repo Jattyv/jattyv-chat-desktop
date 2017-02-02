@@ -4,7 +4,7 @@
     <name>Jattyv Desktop Application</name>
     <groupId>de.jattyv.client.desktop</groupId>
     <artifactId>jattyv-client-desktop</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -16,12 +16,7 @@
         <dependency>
             <groupId>de.jattyv.jcapi</groupId>
             <artifactId>jcapi</artifactId>
-            <version>0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>de.jattyv.jsapi</groupId>
-            <artifactId>jsapi</artifactId>
-            <version>0.1-SNAPSHOT</version>
+            <version>0.2-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
