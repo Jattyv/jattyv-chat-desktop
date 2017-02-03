@@ -51,8 +51,6 @@ import javax.swing.event.ListSelectionListener;
 public class ChatCard extends JPanel implements KeyListener, MouseListener, ListSelectionListener, ActionListener {
 
     private JTextArea textAreaInput;
-    private JButton btnFriends;
-    private JButton btnGroups;
     private JScrollPane scrollPaneFG;
     private JScrollPane scrollPaneMessages;
     private JList listFG;
@@ -86,27 +84,11 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
         splitPane_1.setRightComponent(textAreaInput);
 
         JSplitPane splitPane = new JSplitPane();
-        splitPane.setResizeWeight(0.1);
+        splitPane.setResizeWeight(0.4);
         splitPane_1.setLeftComponent(splitPane);
 
-        JSplitPane splitPane_2 = new JSplitPane();
-        splitPane_2.setOrientation(JSplitPane.VERTICAL_SPLIT);
-        splitPane_2.setResizeWeight(0.05);
-        splitPane.setLeftComponent(splitPane_2);
-
-        JSplitPane splitPane_3 = new JSplitPane();
-        splitPane_3.setResizeWeight(0.5);
-        splitPane.setResizeWeight(0.2);
-        splitPane_2.setLeftComponent(splitPane_3);
-
-        btnFriends = new JButton("Friends");
-        splitPane_3.setLeftComponent(btnFriends);
-
-        btnGroups = new JButton("Groups");
-        splitPane_3.setRightComponent(btnGroups);
-
         scrollPaneFG = new JScrollPane();
-        splitPane_2.setRightComponent(scrollPaneFG);
+        splitPane.setLeftComponent(scrollPaneFG);
 
         listFG = new JList(modelFG);
         listFG.setCellRenderer(new FGCellRenderer());
