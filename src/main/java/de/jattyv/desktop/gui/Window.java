@@ -125,6 +125,7 @@ public class Window implements JGui {
 
     @Override
     public void addGroup(String gName) {
+        ccard.addGroup(gName);
     }
 
     @Override
