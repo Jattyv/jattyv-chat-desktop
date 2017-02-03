@@ -171,6 +171,11 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
                 String message = textAreaInput.getText();
                 textAreaInput.setText("");
                 window.getHandler().getOutHandler().sendNewMessage(toUser, message);
+            }else if (fg.getType() == FG.FG_TYPE_GROUP){
+                String toGroup = fg.getTitle();
+                String message = textAreaInput.getText();
+                textAreaInput.setText("");
+                window.getHandler().getOutHandler().sendNewGroupMessage(toGroup, message);
             }
         }
 
