@@ -194,6 +194,11 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
             for (String message : messages) {
                 addMessage(fg.getTitle(), message);
             }
+        }else if(fg.getType() == FG.FG_TYPE_GROUP){
+            LinkedList<String> messages = window.getHandler().getGroupMessages(fg.getTitle());
+            for (String message : messages) {
+                addMessage(fg.getTitle(), message);
+            }
         }
 
     }
@@ -224,12 +229,10 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
     public void addMessage(String fName, String message) {
         if (!listFG.isSelectionEmpty()) {
             FG fg = (FG) listFG.getSelectedValue();
-            if (fg.getType() == FG.FG_TYPE_FRIEND) {
                 if (fg.getTitle().equals(fName)) {
                     modelMessages.addElement(message);
                     listMessages.ensureIndexIsVisible(modelMessages.size() - 1);
                 }
-            }
         }
     }
 
