@@ -209,8 +209,8 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
             String fname = JOptionPane.showInputDialog("Enter The Friends Username:", "Friendsname");
             if (!fname.equals("")) {
                 friends.add(fname);
-                if (!settings.isClientSettingsPathAvailable()) {
-                    modelFG.addElement(new FG(fname, FG.FG_TYPE_FRIEND));
+                modelFG.addElement(new FG(fname, FG.FG_TYPE_FRIEND));
+                if (!settings.isClientSettingsPathAvailable()){
                     new ConfigFileHandler().write(window.getHandler().getUser().getName() + ".json", JattyvFileController.getFriendsAsJson(friends));
                 } else {
                     new ConfigFileHandler().write(settings.getClientSettingsPath(), JattyvFileController.getFriendsAsJson(friends));
