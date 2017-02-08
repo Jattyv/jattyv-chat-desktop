@@ -127,7 +127,7 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
 
         if (settings.isClientSettingsAvailable()) {
             for (String fname : settings.getClientSettings().getFriends()) {
-                FG fg = new FG(fname, FG.FG_TYPE_FRIEND);
+                FG fg = new FG(fname, FG.FG_TYPE_FRIEND, fname);
                 modelFG.addElement(fg);
                 friends.add(fname);
             }
@@ -154,7 +154,7 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
                 textAreaInput.setText("");
                 window.getHandler().getOutHandler().sendNewMessage(toUser, message);
             } else if (fg.getType() == FG.FG_TYPE_GROUP) {
-                String toGroup = fg.getTitle();
+                String toGroup = fg.getId();
                 String message = textAreaInput.getText();
                 textAreaInput.setText("");
                 window.getHandler().getOutHandler().sendNewGroupMessage(toGroup, message);
@@ -209,7 +209,7 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
             String fname = JOptionPane.showInputDialog("Enter The Friends Username:", "Friendsname");
             if (!fname.equals("")) {
                 friends.add(fname);
-                modelFG.addElement(new FG(fname, FG.FG_TYPE_FRIEND));
+                modelFG.addElement(new FG(fname, FG.FG_TYPE_FRIEND, fname));
                 if (!settings.isClientSettingsPathAvailable()){
                     new ConfigFileHandler().write(window.getHandler().getUser().getName() + ".json", JattyvFileController.getFriendsAsJson(friends));
                 } else {
@@ -228,7 +228,7 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
             if (fg.getType() == FG.FG_TYPE_GROUP) {
                 String fname = JOptionPane.showInputDialog("Enter the UserName of you friend you want to add to " + fg.getTitle());
                 if (!fname.equals("")) {
-                    window.getHandler().getOutHandler().addUserToGroup(fg.getTitle(), fname);
+                    window.getHandler().getOutHandler().addUserToGroup(fg.getId(), fname);
                 }
             }
         }
@@ -244,16 +244,16 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
         }
     }
 
-    public void addGroup(String gName) {
-        FG fg = new FG(gName, FG.FG_TYPE_GROUP);
+    public void addGroup(String gName, String gID) {
+        FG fg = new FG(gName, FG.FG_TYPE_GROUP, gID);
         modelFG.addElement(fg);
     }
 
-    public void addGroupMessage(String gName, String message) {
+    public void addGroupMessage(String gID, String message) {
         if (!listFG.isSelectionEmpty()) {
             FG fg = (FG) listFG.getSelectedValue();
             if (fg.getType() == FG.FG_TYPE_GROUP) {
-                if (fg.getTitle().equals(gName)) {
+                if (fg.getId().equals(gID)) {
                     modelMessages.addElement(message);
                     listMessages.ensureIndexIsVisible(modelMessages.size() - 1);
                 }

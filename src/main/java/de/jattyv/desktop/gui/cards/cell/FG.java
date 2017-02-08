@@ -15,13 +15,16 @@ public class FG {
     
     private final int type;
     
+    private final String id;
+    
     public static final int FG_TYPE_FRIEND = 0;
     
     public static final int FG_TYPE_GROUP = 1;
     
-    public FG(String title, int type){
+    public FG(String title, int type, String id){
         this.title = title;
         this.type = type;
+        this.id = id;
     }
 
     public String getTitle() {
@@ -31,6 +34,12 @@ public class FG {
     public int getType() {
         return type;
     }
+
+    public String getId() {
+        return id;
+    }
+    
+    
     
     
     

@@ -124,13 +124,18 @@ public class Window implements JGui {
     }
 
     @Override
-    public void addGroup(String gName) {
-        ccard.addGroup(gName);
+    public void addGroup(String gName, String gID) {
+        ccard.addGroup(gName, gID);
     }
 
     @Override
-    public void addGroupMessage(String gName, String message) {
-        ccard.addGroupMessage(gName, message);
+    public void addGroupMessage(String gID, String message) {
+        ccard.addGroupMessage(gID, message);
+    }
+
+    @Override
+    public void addFriend(String fName) {
+
     }
 
 }
