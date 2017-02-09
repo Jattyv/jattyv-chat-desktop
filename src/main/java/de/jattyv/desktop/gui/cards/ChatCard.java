@@ -18,8 +18,8 @@ package de.jattyv.desktop.gui.cards;
 
 import de.jattyv.desktop.data.ConfigFileHandler;
 import de.jattyv.desktop.gui.Window;
-import de.jattyv.desktop.gui.cards.cell.FG;
 import de.jattyv.desktop.gui.cards.cell.FGCellRenderer;
+import de.jattyv.jcapi.client.gui.cell.FG;
 import de.jattyv.jcapi.data.jfc.JattyvFileController;
 import de.jattyv.jcapi.data.jfc.data.Settings;
 import java.awt.BorderLayout;

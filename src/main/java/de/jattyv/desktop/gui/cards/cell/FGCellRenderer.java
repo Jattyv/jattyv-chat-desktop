@@ -5,6 +5,7 @@
  */
 package de.jattyv.desktop.gui.cards.cell;
 
+import de.jattyv.jcapi.client.gui.cell.FG;
 import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JLabel;
