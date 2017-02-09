@@ -34,13 +34,12 @@ import javax.swing.JTextField;
  */
 public class LoginCard extends JPanel implements KeyListener {
 
-    private JTextField inputLName;
-    private JPasswordField inputLPassword;
+    private final JTextField inputLName;
+    private final JPasswordField inputLPassword;
 
-    private Window window;
+    private final Window window;
 
     private boolean registration;
-
 
     public LoginCard(Window window, boolean registration, Settings settings) {
         super();

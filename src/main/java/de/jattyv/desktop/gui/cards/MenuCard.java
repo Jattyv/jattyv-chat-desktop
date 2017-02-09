@@ -31,12 +31,12 @@ import javax.swing.JTextArea;
  */
 public class MenuCard extends JPanel implements ActionListener {
 
-    JButton btnLogin;
-    JButton btnRegist;
+    private final JButton btnLogin;
+    private final JButton btnRegist;
 
-    JButton startServer;
+    private final JButton startServer;
 
-    Window window;
+    private final Window window;
 
     public MenuCard(Window window) {
         super();

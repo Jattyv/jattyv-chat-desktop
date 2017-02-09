@@ -31,7 +31,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.LinkedList;
 import javax.swing.DefaultListModel;
-import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -50,20 +49,20 @@ import javax.swing.event.ListSelectionListener;
  */
 public class ChatCard extends JPanel implements KeyListener, MouseListener, ListSelectionListener, ActionListener {
 
-    private JTextArea textAreaInput;
-    private JScrollPane scrollPaneFG;
-    private JScrollPane scrollPaneMessages;
-    private JList listFG;
-    private JList<String> listMessages;
-    private DefaultListModel modelFG = new DefaultListModel();
-    private LinkedList<String> friends = new LinkedList<>();
-    private DefaultListModel<String> modelMessages = new DefaultListModel<String>();
-    private JMenuBar menuBar;
-    private JMenu mnFriends;
-    private JMenuItem mntmSFR;
-    private JMenu mnGroups;
-    private JMenuItem mntmSGR;
-    private JMenuItem mntmATG;
+    private final JTextArea textAreaInput;
+    private final JScrollPane scrollPaneFG;
+    private final JScrollPane scrollPaneMessages;
+    private final JList listFG;
+    private final JList<String> listMessages;
+    private final DefaultListModel modelFG = new DefaultListModel();
+    private final LinkedList<String> friends = new LinkedList<>();
+    private final DefaultListModel<String> modelMessages = new DefaultListModel<>();
+    private final JMenuBar menuBar;
+    private final JMenu mnFriends;
+    private final JMenuItem mntmSFR;
+    private final JMenu mnGroups;
+    private final JMenuItem mntmSGR;
+    private final JMenuItem mntmATG;
 
     Window window;
 
@@ -195,12 +194,13 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
                 addMessage(fg.getTitle(), message);
             }
         } else if (fg.getType() == FG.FG_TYPE_GROUP) {
-            LinkedList<String> messages = window.getHandler().getGroupMessages(fg.getTitle());
-            for (String message : messages) {
-                addMessage(fg.getTitle(), message);
+            LinkedList<String> messages = window.getHandler().getGroupMessages(fg.getId());
+            if (messages != null) {
+                for (String message : messages) {
+                    addMessage(fg.getTitle(), message);
+                }
             }
         }
-
     }
 
     @Override
@@ -210,7 +210,7 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
             if (!fname.equals("")) {
                 friends.add(fname);
                 modelFG.addElement(new FG(fname, FG.FG_TYPE_FRIEND, fname));
-                if (!settings.isClientSettingsPathAvailable()){
+                if (!settings.isClientSettingsPathAvailable()) {
                     new ConfigFileHandler().write(window.getHandler().getUser().getName() + ".json", JattyvFileController.getFriendsAsJson(friends));
                 } else {
                     new ConfigFileHandler().write(settings.getClientSettingsPath(), JattyvFileController.getFriendsAsJson(friends));

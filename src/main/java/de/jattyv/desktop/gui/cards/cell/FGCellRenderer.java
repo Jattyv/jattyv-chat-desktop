@@ -15,25 +15,25 @@ import javax.swing.ListCellRenderer;
  *
  * @author Dimitrios Diamantidis &lt;Dimitri.dia@ledimi.com&gt;
  */
-public class FGCellRenderer extends JLabel implements ListCellRenderer{
-    
-    public FGCellRenderer(){
+public class FGCellRenderer extends JLabel implements ListCellRenderer {
+
+    public FGCellRenderer() {
         setOpaque(true);
     }
 
     @Override
     public Component getListCellRendererComponent(JList jlist, Object e, int i, boolean isSelected, boolean cellHasFocus) {
-       FG entry = (FG) e;
-       setText(entry.getTitle());
-       if(entry.getType() == FG.FG_TYPE_FRIEND){
-           setBackground(Color.CYAN);
-       }else if(entry.getType() == FG.FG_TYPE_GROUP){
-           setBackground(Color.RED);
-       }
-       if(isSelected){
-           setBackground(Color.yellow);
-       }
-       return this;
+        FG entry = (FG) e;
+        setText(entry.getTitle());
+        if (entry.getType() == FG.FG_TYPE_FRIEND) {
+            setBackground(Color.CYAN);
+        } else if (entry.getType() == FG.FG_TYPE_GROUP) {
+            setBackground(Color.RED);
+        }
+        if (isSelected) {
+            setBackground(Color.yellow);
+        }
+        return this;
     }
-    
+
 }

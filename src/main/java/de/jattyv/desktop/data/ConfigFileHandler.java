@@ -84,28 +84,28 @@ public class ConfigFileHandler implements JattyvFileHandler {
         FileReader in = null;
         File config = new File(path);
         if (config.exists()) {
-        try {
-
-            in = new FileReader(path);
-            BufferedReader br = new BufferedReader(in);
-            String line = "";
-            String content = "";
-            while ((line = br.readLine()) != null) {
-                content += line;
-            }
-            in.close();
-            return content;
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(ConfigFileHandler.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(ConfigFileHandler.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
             try {
+
+                in = new FileReader(path);
+                BufferedReader br = new BufferedReader(in);
+                String line = "";
+                String content = "";
+                while ((line = br.readLine()) != null) {
+                    content += line;
+                }
                 in.close();
+                return content;
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(ConfigFileHandler.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
                 Logger.getLogger(ConfigFileHandler.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                try {
+                    in.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(ConfigFileHandler.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-        }
         } else {
             try {
                 config.createNewFile();

@@ -36,12 +36,12 @@ public class Window implements JGui {
 
     private JFrame frame;
 
-    private CardLayout clayout;
-    private JPanel card;
-    private MenuCard mcard;
-    private LoginCard lcard;
-    private LoginCard rcard;
-    private ChatCard ccard;
+    private final CardLayout clayout;
+    private final JPanel card;
+    private final MenuCard mcard;
+    private final LoginCard lcard;
+    private final LoginCard rcard;
+    private final ChatCard ccard;
 
     public final String MENUC = "menu";
     public final String LOGINC = "login";
@@ -116,7 +116,6 @@ public class Window implements JGui {
     public void showError(String errKey) {
         JOptionPane.showMessageDialog(null, errKey, "ERROR", JOptionPane.ERROR_MESSAGE);
     }
-
 
     @Override
     public boolean alert(String msg, String alertType) {
