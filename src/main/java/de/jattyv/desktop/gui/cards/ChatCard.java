@@ -195,10 +195,8 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
             }
         } else if (fg.getType() == FG.FG_TYPE_GROUP) {
             LinkedList<String> messages = window.getHandler().getGroupMessages(fg.getId());
-            if (messages != null) {
-                for (String message : messages) {
-                    addMessage(fg.getTitle(), message);
-                }
+            for (String message : messages) {
+                addMessage(fg.getTitle(), message);
             }
         }
     }
