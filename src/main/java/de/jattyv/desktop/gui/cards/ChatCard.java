@@ -206,13 +206,7 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
         if (e.getSource() == mntmSFR) {
             String fname = JOptionPane.showInputDialog("Enter The Friends Username:", "Friendsname");
             if (!fname.equals("")) {
-                friends.add(fname);
-                modelFG.addElement(new FG(fname, FG.FG_TYPE_FRIEND, fname));
-                if (!settings.isClientSettingsPathAvailable()) {
-                    new ConfigFileHandler().write(window.getHandler().getUser().getName() + ".json", JattyvFileController.getFriendsAsJson(friends));
-                } else {
-                    new ConfigFileHandler().write(settings.getClientSettingsPath(), JattyvFileController.getFriendsAsJson(friends));
-                }
+                window.getHandler().getOutHandler().sendNewFriendRequest(fname);
             }
         }
         if (e.getSource() == mntmSGR) {
@@ -245,6 +239,18 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
     public void addGroup(String gName, String gID) {
         FG fg = new FG(gName, FG.FG_TYPE_GROUP, gID);
         modelFG.addElement(fg);
+    }
+
+    public void addFriend(String fName) {
+        FG fg = new FG(fName, FG.FG_TYPE_FRIEND, fName);
+        modelFG.addElement(fg);
+        friends.add(fName);
+        if (!settings.isClientSettingsPathAvailable()) {
+            new ConfigFileHandler().write(window.getHandler().getUser().getName() + ".json", JattyvFileController.getFriendsAsJson(friends));
+        } else {
+            new ConfigFileHandler().write(settings.getClientSettingsPath(), JattyvFileController.getFriendsAsJson(friends));
+        }
+
     }
 
     public void addGroupMessage(String gID, String message) {

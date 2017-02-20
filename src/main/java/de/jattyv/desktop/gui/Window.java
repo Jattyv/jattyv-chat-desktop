@@ -134,7 +134,7 @@ public class Window implements JGui {
 
     @Override
     public void addFriend(String fName) {
-
+        ccard.addFriend(fName);
     }
 
 }
