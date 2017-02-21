@@ -185,16 +185,18 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
     @Override
     public void valueChanged(ListSelectionEvent e) {
         modelMessages.clear();
-        FG fg = (FG) listFG.getSelectedValue();
-        if (fg.getType() == FG.FG_TYPE_FRIEND) {
-            LinkedList<String> messages = window.getHandler().getMessages(fg.getTitle());
-            for (String message : messages) {
-                addMessage(fg.getTitle(), message);
-            }
-        } else if (fg.getType() == FG.FG_TYPE_GROUP) {
-            LinkedList<String> messages = window.getHandler().getGroupMessages(fg.getId());
-            for (String message : messages) {
-                addMessage(fg.getTitle(), message);
+        if (listFG.getSelectedValue() != null) {
+            FG fg = (FG) listFG.getSelectedValue();
+            if (fg.getType() == FG.FG_TYPE_FRIEND) {
+                LinkedList<String> messages = window.getHandler().getMessages(fg.getTitle());
+                for (String message : messages) {
+                    addMessage(fg.getTitle(), message);
+                }
+            } else if (fg.getType() == FG.FG_TYPE_GROUP) {
+                LinkedList<String> messages = window.getHandler().getGroupMessages(fg.getId());
+                for (String message : messages) {
+                    addMessage(fg.getTitle(), message);
+                }
             }
         }
     }
