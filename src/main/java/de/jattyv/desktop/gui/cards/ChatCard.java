@@ -30,6 +30,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.LinkedList;
+import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JMenu;
@@ -55,7 +56,6 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
     private final JList listFG;
     private final JList<String> listMessages;
     private final DefaultListModel modelFG = new DefaultListModel();
-    private final LinkedList<String> friends = new LinkedList<>();
     private final DefaultListModel<String> modelMessages = new DefaultListModel<>();
     private final JMenuBar menuBar;
     private final JMenu mnFriends;
@@ -125,10 +125,8 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
         this.settings = settings;
 
         if (settings.isClientSettingsAvailable()) {
-            for (String fname : settings.getClientSettings().getFriends()) {
-                FG fg = new FG(fname, FG.FG_TYPE_FRIEND, fname);
+            for (FG fg : settings.getClientSettings().getFriends()) {
                 modelFG.addElement(fg);
-                friends.add(fname);
             }
         }
     }
@@ -242,15 +240,22 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
     }
 
     public void addFriend(String fName) {
-        FG fg = new FG(fName, FG.FG_TYPE_FRIEND, fName);
-        modelFG.addElement(fg);
-        friends.add(fName);
-        if (!settings.isClientSettingsPathAvailable()) {
-            new ConfigFileHandler().write(window.getHandler().getUser().getName() + ".json", JattyvFileController.getFriendsAsJson(friends));
-        } else {
-            new ConfigFileHandler().write(settings.getClientSettingsPath(), JattyvFileController.getFriendsAsJson(friends));
+        int answer = JOptionPane.showConfirmDialog(null, fName + " asks to be your friend.", "FRIENDREQUEST", JOptionPane.INFORMATION_MESSAGE);
+        if (answer == JOptionPane.YES_OPTION) {
+            window.getHandler().getOutHandler().sendOkayToFriendRequest(fName);
         }
+    }
 
+    public void updateFGList(List<FG> fgs) {
+        modelFG.clear();
+        for (FG fg : fgs) {
+            modelFG.addElement(fg);
+        }
+        if (!settings.isClientSettingsPathAvailable()) {
+            new ConfigFileHandler().write(window.getHandler().getUser().getName() + ".json", JattyvFileController.getFGAsJson(fgs));
+        } else {
+            new ConfigFileHandler().write(settings.getClientSettingsPath(), JattyvFileController.getFGAsJson(fgs));
+        }
     }
 
     public void addGroupMessage(String gID, String message) {

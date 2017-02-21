@@ -20,10 +20,12 @@ import de.jattyv.desktop.gui.cards.ChatCard;
 import de.jattyv.desktop.gui.cards.LoginCard;
 import de.jattyv.desktop.gui.cards.MenuCard;
 import de.jattyv.jcapi.client.gui.JGui;
+import de.jattyv.jcapi.client.gui.cell.FG;
 import de.jattyv.jcapi.client.handler.Handler;
 import de.jattyv.jcapi.data.jfc.data.Settings;
 import de.jattyv.jcapi.server.ChatServer;
 import java.awt.CardLayout;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -135,6 +137,11 @@ public class Window implements JGui {
     @Override
     public void addFriend(String fName) {
         ccard.addFriend(fName);
+    }
+
+    @Override
+    public void updateFGList(List<FG> fgs) {
+        ccard.updateFGList(fgs);
     }
 
 }
