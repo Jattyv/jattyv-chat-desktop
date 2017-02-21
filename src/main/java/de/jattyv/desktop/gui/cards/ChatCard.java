@@ -235,8 +235,10 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
     }
 
     public void addGroup(String gName, String gID) {
-        FG fg = new FG(gName, FG.FG_TYPE_GROUP, gID);
-        modelFG.addElement(fg);
+        int answer = JOptionPane.showConfirmDialog(null, "Do you wanna join the Group " + gName +".", "GROUPREQUEST", JOptionPane.INFORMATION_MESSAGE);
+        if (answer == JOptionPane.YES_OPTION) {
+            window.getHandler().getOutHandler().sendOkayToGroupRequest(gID);
+        }
     }
 
     public void addFriend(String fName) {
