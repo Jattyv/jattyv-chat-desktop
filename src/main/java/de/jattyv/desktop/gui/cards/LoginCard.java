@@ -41,7 +41,7 @@ public class LoginCard extends JPanel implements KeyListener {
 
     private boolean registration;
 
-    public LoginCard(Window window, boolean registration, Settings settings) {
+    public LoginCard(Window window, boolean registration) {
         super();
         this.window = window;
         this.registration = registration;
@@ -60,9 +60,6 @@ public class LoginCard extends JPanel implements KeyListener {
         this.add(lblNewLabel, gbc_lblNewLabel);
 
         inputLName = new JTextField();
-        if (settings.isuNameAvailable()) {
-            inputLName.setText(settings.getuName());
-        }
         GridBagConstraints gbc_inputLName = new GridBagConstraints();
         gbc_inputLName.insets = new Insets(0, 0, 5, 0);
         gbc_inputLName.fill = GridBagConstraints.HORIZONTAL;

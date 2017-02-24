@@ -16,6 +16,7 @@
  */
 package de.jattyv.desktop.gui;
 
+import de.jattyv.desktop.data.FileHandler;
 import de.jattyv.desktop.gui.cards.ChatCard;
 import de.jattyv.desktop.gui.cards.LoginCard;
 import de.jattyv.desktop.gui.cards.MenuCard;
@@ -52,13 +53,12 @@ public class Window implements JGui {
 
     private Handler handler;
 
-    private Settings settings;
 
-    public Window(Settings settings) {
+    public Window() {
         mcard = new MenuCard(this);
-        lcard = new LoginCard(this, false, settings);
-        rcard = new LoginCard(this, true, settings);
-        ccard = new ChatCard(this, settings);
+        lcard = new LoginCard(this, false);
+        rcard = new LoginCard(this, true);
+        ccard = new ChatCard(this);
         clayout = new CardLayout();
         card = new JPanel();
         card.setLayout(clayout);
@@ -66,7 +66,6 @@ public class Window implements JGui {
         card.add(lcard, LOGINC);
         card.add(rcard, REGISTRATIONC);
         card.add(ccard, CHATC);
-        this.settings = settings;
     }
 
     public void init() {
@@ -102,7 +101,7 @@ public class Window implements JGui {
     }
 
     public void startServer() {
-        new ChatServer(settings).start();
+        new ChatServer(new FileHandler()).start();
         JOptionPane.showMessageDialog(null, "Server started", "INFO", JOptionPane.INFORMATION_MESSAGE);
     }
 

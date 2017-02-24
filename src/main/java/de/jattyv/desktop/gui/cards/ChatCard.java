@@ -16,7 +16,7 @@
  */
 package de.jattyv.desktop.gui.cards;
 
-import de.jattyv.desktop.data.ConfigFileHandler;
+import de.jattyv.desktop.data.FileHandler;
 import de.jattyv.desktop.gui.Window;
 import de.jattyv.desktop.gui.cards.cell.FGCellRenderer;
 import de.jattyv.jcapi.client.gui.cell.FG;
@@ -68,7 +68,7 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
 
     Settings settings;
 
-    public ChatCard(Window window, Settings settings) {
+    public ChatCard(Window window) {
         super();
         this.window = window;
         this.setLayout(new BorderLayout(0, 0));
@@ -123,12 +123,6 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
         mnGroups.add(mntmATG);
 
         this.settings = settings;
-
-        if (settings.isClientSettingsAvailable()) {
-            for (FG fg : settings.getClientSettings().getFriends()) {
-                modelFG.addElement(fg);
-            }
-        }
     }
 
     @Override
@@ -255,11 +249,7 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
         for (FG fg : fgs) {
             modelFG.addElement(fg);
         }
-        if (!settings.isClientSettingsPathAvailable()) {
-            new ConfigFileHandler().write(window.getHandler().getUser().getName() + ".json", JattyvFileController.getFGAsJson(fgs));
-        } else {
-            new ConfigFileHandler().write(settings.getClientSettingsPath(), JattyvFileController.getFGAsJson(fgs));
-        }
+        new FileHandler().write(window.getHandler().getUser().getName() + ".json", JattyvFileController.getFGAsJson(fgs));
     }
 
     public void addGroupMessage(String gID, String message) {
