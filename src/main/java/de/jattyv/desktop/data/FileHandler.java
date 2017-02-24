@@ -61,20 +61,23 @@ public class FileHandler implements JattyvFileHandler {
 
     @Override
     public String readFile(String path) {
-        try {
-            BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(path), "UTF8"));
-            StringBuilder strBuilder = new StringBuilder();
-            String line = "";
-            while ((line = in.readLine()) != null) {
-                strBuilder.append(line).append("\n");
+        File file = new File(path);
+        if (file.exists()) {
+            try {
+                BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(path), "UTF8"));
+                StringBuilder strBuilder = new StringBuilder();
+                String line = "";
+                while ((line = in.readLine()) != null) {
+                    strBuilder.append(line).append("\n");
+                }
+                return strBuilder.toString();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(FileHandler.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(FileHandler.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(FileHandler.class.getName()).log(Level.SEVERE, null, ex);
             }
-            return strBuilder.toString();
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(FileHandler.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(FileHandler.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(FileHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return null;
