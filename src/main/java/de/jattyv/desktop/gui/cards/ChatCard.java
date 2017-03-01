@@ -197,22 +197,24 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == mntmSFR) {
             String fname = JOptionPane.showInputDialog("Enter The Friends Username:", "Friendsname");
-            if (!fname.equals("")) {
+            if (fname != null && !fname.equals("")) {
                 window.getHandler().getOutHandler().sendNewFriendRequest(fname);
             }
         }
         if (e.getSource() == mntmSGR) {
             String gname = JOptionPane.showInputDialog("Create a new Group:", "GroupName");
-            if (!gname.equals("")) {
+            if (gname != null && !gname.equals("")) {
                 window.getHandler().getOutHandler().createGroup(gname);
             }
         }
         if (e.getSource() == mntmATG) {
-            FG fg = (FG) listFG.getSelectedValue();
-            if (fg.getType() == FG.FG_TYPE_GROUP) {
-                String fname = JOptionPane.showInputDialog("Enter the UserName of you friend you want to add to " + fg.getTitle());
-                if (!fname.equals("")) {
-                    window.getHandler().getOutHandler().addUserToGroup(fg.getId(), fname);
+            if (!listFG.isSelectionEmpty()) {
+                FG fg = (FG) listFG.getSelectedValue();
+                if (fg.getType() == FG.FG_TYPE_GROUP) {
+                    String fname = JOptionPane.showInputDialog("Enter the UserName of you friend you want to add to " + fg.getTitle());
+                    if (fname != null && !fname.equals("")) {
+                        window.getHandler().getOutHandler().addUserToGroup(fg.getId(), fname);
+                    }
                 }
             }
         }
