@@ -42,6 +42,11 @@ public class FileHandler implements JattyvFileHandler {
 
     @Override
     public void write(String dataname, String content) {
+        File file = new File(dataname);
+        File dirs = new File(file.getParent());
+        if(!dirs.exists()){
+            dirs.mkdirs();
+        }
         FileWriter fw = null;
         try {
             fw = new FileWriter(dataname);
