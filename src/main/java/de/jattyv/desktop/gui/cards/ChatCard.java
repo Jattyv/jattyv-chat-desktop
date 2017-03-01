@@ -41,6 +41,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -58,15 +59,13 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
     private final DefaultListModel modelFG = new DefaultListModel();
     private final DefaultListModel<String> modelMessages = new DefaultListModel<>();
     private final JMenuBar menuBar;
-    private final JMenu mnFriends;
+    private final JMenu mnUser;
     private final JMenuItem mntmSFR;
-    private final JMenu mnGroups;
     private final JMenuItem mntmSGR;
     private final JMenuItem mntmATG;
+    private final JMenuItem mntmRFL;
 
     Window window;
-
-    Settings settings;
 
     public ChatCard(Window window) {
         super();
@@ -104,25 +103,25 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
         menuBar = new JMenuBar();
         this.add(menuBar, BorderLayout.NORTH);
 
-        mnFriends = new JMenu("Friends");
-        menuBar.add(mnFriends);
-
-        mnGroups = new JMenu("Groups");
-        menuBar.add(mnGroups);
+        mnUser = new JMenu("User");
+        menuBar.add(mnUser);
 
         mntmSFR = new JMenuItem("add Friend");
         mntmSFR.addActionListener(this);
-        mnFriends.add(mntmSFR);
+        mnUser.add(mntmSFR);
 
         mntmSGR = new JMenuItem("add Group");
         mntmSGR.addActionListener(this);
-        mnGroups.add(mntmSGR);
+        mnUser.add(mntmSGR);
 
         mntmATG = new JMenuItem("add to Group");
         mntmATG.addActionListener(this);
-        mnGroups.add(mntmATG);
+        mnUser.add(mntmATG);
 
-        this.settings = settings;
+        mntmRFL = new JMenuItem("remove FG");
+        mntmRFL.addActionListener(this);
+        mnUser.add(mntmRFL);
+
     }
 
     @Override
@@ -156,7 +155,6 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
     }
 
     @Override
@@ -218,6 +216,19 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
                 }
             }
         }
+        if (e.getSource() == mntmRFL) {
+            if (!listFG.isSelectionEmpty()) {
+                FG fg = (FG) listFG.getSelectedValue();
+                int answer = JOptionPane.showConfirmDialog(null, "Do you wanna remove " + fg.getTitle() + ".", "REMOVEREQUEST", JOptionPane.INFORMATION_MESSAGE);
+                if (answer == JOptionPane.YES_OPTION) {
+                    if (fg.getType() == FG.FG_TYPE_FRIEND) {
+                        window.getHandler().getOutHandler().sendRemoveFriendRequest(fg.getId());
+                    } else if (fg.getType() == FG.FG_TYPE_GROUP) {
+                        window.getHandler().getOutHandler().sendRemoveGroupRequest(fg.getId());
+                    }
+                }
+            }
+        }
     }
 
     public void addMessage(String fName, String message) {
@@ -249,7 +260,6 @@ public class ChatCard extends JPanel implements KeyListener, MouseListener, List
         for (FG fg : fgs) {
             modelFG.addElement(fg);
         }
-        new FileHandler().write(window.getHandler().getUser().getName() + ".json", JattyvFileController.getFGAsJson(fgs));
     }
 
     public void addGroupMessage(String gID, String message) {
