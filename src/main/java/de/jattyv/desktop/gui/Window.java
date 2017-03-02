@@ -120,7 +120,10 @@ public class Window implements JGui {
 
     @Override
     public boolean alert(String msg, String alertType) {
-        JOptionPane.showMessageDialog(null, msg, "ERROR", JOptionPane.ERROR_MESSAGE);
+        int answer = JOptionPane.showConfirmDialog(null, msg, alertType, JOptionPane.INFORMATION_MESSAGE);
+        if (answer == JOptionPane.YES_OPTION) {
+            return true;
+        }
         return false;
     }
 
