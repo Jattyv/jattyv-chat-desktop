@@ -44,7 +44,7 @@ public class FileHandler implements JattyvFileHandler {
     public void write(String dataname, String content) {
         File file = new File(dataname);
         File dirs = new File(file.getParent());
-        if(!dirs.exists()){
+        if (!dirs.exists()) {
             dirs.mkdirs();
         }
         FileWriter fw = null;
@@ -72,8 +72,12 @@ public class FileHandler implements JattyvFileHandler {
                 BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(path), "UTF8"));
                 StringBuilder strBuilder = new StringBuilder();
                 String line = "";
+                line = in.readLine();
+                if (line != null) {
+                    strBuilder.append(line);
+                }
                 while ((line = in.readLine()) != null) {
-                    strBuilder.append(line).append("\n");
+                    strBuilder.append("\n").append(line);
                 }
                 return strBuilder.toString();
             } catch (FileNotFoundException ex) {
