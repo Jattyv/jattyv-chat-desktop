@@ -26,6 +26,8 @@ import de.jattyv.jcapi.client.handler.Handler;
 import de.jattyv.jcapi.data.jfc.data.Settings;
 import de.jattyv.jcapi.server.ChatServer;
 import java.awt.CardLayout;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -35,7 +37,7 @@ import javax.swing.JPanel;
  *
  * @author Dimitrios Diamantidis &lt;Dimitri.dia@ledimi.com&gt;
  */
-public class Window implements JGui {
+public class Window implements JGui, WindowListener {
 
     private JFrame frame;
 
@@ -52,7 +54,7 @@ public class Window implements JGui {
     public final String CHATC = "chat";
 
     private Handler handler;
-
+    private ChatServer server;
 
     public Window() {
         mcard = new MenuCard(this);
@@ -70,7 +72,7 @@ public class Window implements JGui {
 
     public void init() {
         frame = new JFrame("Jattyv");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.addWindowListener(this);
         frame.setSize(500, 500);
         frame.setLocationRelativeTo(null);
         frame.getContentPane().add(card);
@@ -101,7 +103,8 @@ public class Window implements JGui {
     }
 
     public void startServer() {
-        new ChatServer(new FileHandler()).start();
+        server = new ChatServer(new FileHandler());
+        server.start();
         JOptionPane.showMessageDialog(null, "Server started", "INFO", JOptionPane.INFORMATION_MESSAGE);
     }
 
@@ -145,6 +148,44 @@ public class Window implements JGui {
     @Override
     public void updateFGList(List<FG> fgs) {
         ccard.updateFGList(fgs);
+    }
+
+    @Override
+    public void windowOpened(WindowEvent we) {
+    }
+
+    @Override
+    public void windowClosing(WindowEvent we) {
+        int confirm = JOptionPane.showOptionDialog(
+                null, "Are You Sure to Close Application?",
+                "Exit Confirmation", JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE, null, null, null);
+        if (confirm == JOptionPane.YES_OPTION) {
+            if(server != null){
+                server.shutdown();
+            }
+            System.exit(0);
+        }
+    }
+
+    @Override
+    public void windowClosed(WindowEvent we) {
+    }
+
+    @Override
+    public void windowIconified(WindowEvent we) {
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent we) {
+    }
+
+    @Override
+    public void windowActivated(WindowEvent we) {
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent we) {
     }
 
 }
